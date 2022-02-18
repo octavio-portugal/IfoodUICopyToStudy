@@ -32,5 +32,5 @@ class RestaurantFragment: Fragment(R.layout.fragment_restaurant) {
             }
         }
 
-    }
+    }git pull origin master --allow-unrelated-histories
 }
