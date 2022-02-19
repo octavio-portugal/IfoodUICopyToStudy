@@ -15,9 +15,6 @@ class CategoryView(viewGroup: ViewGroup) : ATViewHolder <Category, CategoryItemB
     override fun bind(item: Category) {
         binding.txtCategory.text = item.name
 
-
-
-
         Picasso.get()
             .load(item.logoUrl)
             .into(binding.imgCategory, object : Callback{
@@ -33,5 +30,4 @@ class CategoryView(viewGroup: ViewGroup) : ATViewHolder <Category, CategoryItemB
                 }
             })
     }
-
 }

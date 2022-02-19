@@ -16,4 +16,9 @@
         <item name="fontFamily">@font/louis_cafe_bold</item>
     </style>
 
+    <style name="rounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
 </resources>
