@@ -6,4 +6,7 @@
     <string name="dotted">&#8226;</string>
     <string name="famous">Famosos no Ifood</string>
     <string name="see_more">Ver mais</string>
+    <string name="shop_category_and_distance">\u2022 %1$s \u2022 %2$.1f km</string>
+    <string name="shop_price">%1$s min \u2022 R$ %2$.2f</string>
+    <string name="more_shops">Lojas</string>
 </resources>
