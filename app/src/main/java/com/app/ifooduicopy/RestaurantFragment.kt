@@ -22,6 +22,7 @@ class RestaurantFragment : Fragment(R.layout.fragment_restaurant) {
 
     private val categoryAdapter = ATAdapter({ CategoryView(it) })
     private val bannerAdapter = ATAdapter({ BannerView(it) })
+    private val shopAdapter = ATAdapter({ ShopView(it) })
 
     private var filters = arrayOf(
         FilterItem(1, "Ordenar", closeIcon = R.drawable.ic_baseline_keyboard_arrow_down_24),
@@ -42,6 +43,8 @@ class RestaurantFragment : Fragment(R.layout.fragment_restaurant) {
 
         setBannerMockItems()
 
+        setShopMockItems()
+
         binding?.let {
 
             it.rvCategory.layoutManager =
@@ -51,13 +54,17 @@ class RestaurantFragment : Fragment(R.layout.fragment_restaurant) {
             it.rvBanners.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             it.rvBanners.adapter = bannerAdapter
-            it.rvBanners.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            it.rvBanners.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                        if (newState == RecyclerView.SCROLL_STATE_IDLE){
-                            notifyPositionChanged(recyclerView)
-                        }
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        notifyPositionChanged(recyclerView)
                     }
-                })
+                }
+            })
+
+            it.rvShops.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            it.rvShops.adapter = shopAdapter
 
             addDots(it.dots, bannerAdapter.items.size, 0)
 
@@ -83,18 +90,19 @@ class RestaurantFragment : Fragment(R.layout.fragment_restaurant) {
         }
     }
 
-    private val snapHelper =  LinearSnapHelper()
-    private var position: Int? = RecyclerView.NO_POSITION
+    private val snapHelper = LinearSnapHelper()
 
+    private var position: Int? = RecyclerView.NO_POSITION
     private fun notifyPositionChanged(recyclerView: RecyclerView) {
         val layoutManager = recyclerView.layoutManager
         val view = snapHelper.findSnapView(layoutManager)
-        val currentPosition = if( view == null) RecyclerView.NO_POSITION else layoutManager?.getPosition(view)
+        val currentPosition =
+            if (view == null) RecyclerView.NO_POSITION else layoutManager?.getPosition(view)
 
         val positionChanged = this.position != currentPosition
-            if(positionChanged){
-                addDots(binding!!.dots, bannerAdapter.items.size, currentPosition ?: 0)
-            }
+        if (positionChanged) {
+            addDots(binding!!.dots, bannerAdapter.items.size, currentPosition ?: 0)
+        }
         this.position = currentPosition
     }
 
@@ -152,6 +160,46 @@ class RestaurantFragment : Fragment(R.layout.fragment_restaurant) {
             Banner(
                 3,
                 "https://static-images.ifood.com.br/image/upload/t_high/discoveries/MerceariaeMatinaisPrincipal_mfDO.png"
+            )
+        )
+    }
+
+    private fun setShopMockItems() {
+        shopAdapter.items = arrayListOf(
+            Shop(
+                1,
+                "https://static-images.ifood.com.br/image/upload/t_high/logosgde/46ebd05c-116e-41cd-b3de-7a05c5bc730a/201811071958_30656.jpg",
+                "Pizza Crek"
+            ),
+            Shop(
+                2,
+                "https://static-images.ifood.com.br/image/upload/t_high/logosgde/bb3ad636-7c36-4ae2-a1db-14cd35695350/202001271029_rK15_i.png",
+                "Fábrica de Esfiha"
+            ),
+            Shop(
+                3,
+                "https://static-images.ifood.com.br/image/upload/t_high/logosgde/2fd863ac-4cc2-476c-8896-99aedfdaeb5f/201911150948_Z9QG_i.jpg",
+                "Pecorino"
+            ),
+            Shop(
+                4,
+                "https://static-images.ifood.com.br/image/upload/t_high/logosgde/86b58685-a7dc-4596-be26-2c4037b4d591/202006051304_JuRt_i.jpg",
+                "Barbacoa Grill"
+            ),
+            Shop(
+                5,
+                "https://static-images.ifood.com.br/image/upload/t_high/logosgde/e2f3424a-06fb-46dd-89c3-f7b039e2b1f0_BOLOD_PPIN02.jpeg",
+                "Bolo de Madre"
+            ),
+            Shop(
+                6,
+                "https://static-images.ifood.com.br/image/upload/t_high/logosgde/201901021647_8066dc64-9383-46d1-aa2d-56b9492e27ed.png",
+                "Uau Esfiha"
+            ),
+            Shop(
+                7,
+                "https://static-images.ifood.com.br/image/upload/t_high/logosgde/201705131248_0ca51a98-ee95-48ac-b193-48066c8f20cc.png",
+                "Bar do Juarez"
             )
         )
     }
